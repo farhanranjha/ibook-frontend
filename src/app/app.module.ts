@@ -7,6 +7,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { StoreModule } from "@ngrx/store";
 import { userReducer } from "./store/user.reducer";
 import { AuthInterceptor } from "./interceptors/auth.interceptors";
+import { ErrorInterceptor } from "./interceptors/error.interceptor";
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +16,11 @@ import { AuthInterceptor } from "./interceptors/auth.interceptors";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true,
     },
   ],
