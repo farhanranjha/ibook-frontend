@@ -13,7 +13,7 @@
   </div>
   <small (click)="goToLogin()" class="create-account">Dont have an account? Create one</small>
   <div class="btn-container">
-    <p-button label="Create Account" (onClick)="submitSignup()" [disabled]="!username || !password" />
+    <p-button label="Create Account" (onClick)="submitSignup()" [disabled]="!username || !password || !email" />
   </div>
 </div>
 <p-toast />
