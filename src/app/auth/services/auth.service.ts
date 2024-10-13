@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable, switchMap } from "rxjs";
+import { catchError, map, Observable, of, switchMap } from "rxjs";
 import { environment } from "../../../environments/environment.development";
 import { select, Store } from "@ngrx/store";
 import { selectRefreshToken } from "../../store/user.selector";
+import { setAccessToken } from "../../store/user.actions";
 
 @Injectable({
   providedIn: "root",
