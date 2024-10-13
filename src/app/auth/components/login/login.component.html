@@ -1,1 +1,11 @@
-<p>login works!</p>
+<div class="field-container">
+  <div class="input-container">
+    <label for="username">Username</label>
+    <input pInputText id="username" aria-describedby="username-help" [(ngModel)]="username" />
+  </div>
+  <div class="input-container">
+    <label for="password">Password</label>
+    <p-password id="password" [(ngModel)]="password" [toggleMask]="true" />
+  </div>
+  <p-button label="Login" (onClick)="submitLogin()" />
+</div>
