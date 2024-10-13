@@ -8,10 +8,17 @@ import { StoreModule } from "@ngrx/store";
 import { userReducer } from "./store/user.reducer";
 import { AuthInterceptor } from "./interceptors/auth.interceptors";
 import { ErrorInterceptor } from "./interceptors/error.interceptor";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [HttpClientModule, AppRoutingModule, BrowserModule, StoreModule.forRoot({ user: userReducer })],
+  imports: [
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    BrowserModule,
+    StoreModule.forRoot({ user: userReducer }),
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

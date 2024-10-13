@@ -10,23 +10,32 @@ import { User } from "../../../store/user.model";
 import { Store } from "@ngrx/store";
 import { add } from "../../../store/user.actions";
 import { Router } from "@angular/router";
+import { MessageService } from "primeng/api";
+import { ToastModule } from "primeng/toast";
 
 @Component({
   selector: "app-login",
   standalone: true,
-  imports: [CommonModule, ButtonModule, FormsModule, InputTextModule, FloatLabelModule, PasswordModule],
+  imports: [CommonModule, ToastModule, ButtonModule, FormsModule, InputTextModule, FloatLabelModule, PasswordModule],
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"],
+  providers: [MessageService],
 })
 export class LoginComponent {
   username: string = "";
   password: string = "";
 
-  constructor(private authService: AuthService, private store: Store, private router: Router) {}
+  constructor(
+    private messageService: MessageService,
+    private authService: AuthService,
+    private store: Store,
+    private router: Router
+  ) {}
 
   submitLogin() {
     this.authService.login(this.username, this.password).subscribe({
       next: (response) => {
+        this.messageService.add({ severity: "success", summary: "Success", detail: "Welcome back!" });
         const user: User = {
           username: response.email,
           accessToken: response.access,
@@ -36,7 +45,7 @@ export class LoginComponent {
         this.router.navigate(["/"]);
       },
       error: (error) => {
-        console.error("Login failed", error);
+        this.messageService.add({ severity: "error", summary: "Error", detail: "Invalid Credentials" });
       },
     });
   }
