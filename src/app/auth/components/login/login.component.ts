@@ -49,4 +49,7 @@ export class LoginComponent {
       },
     });
   }
+  goToSignup() {
+    this.router.navigate(["/auth/signup"]);
+  }
 }

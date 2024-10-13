@@ -1,7 +1,7 @@
 .field-container {
   margin: auto;
   width: fit-content;
-  align-items: center;
+  align-items: end;
   justify-content: center;
   margin-top: 120px;
   display: flex;
@@ -11,6 +11,10 @@
   border-radius: 20px;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.02), 0px 0px 2px rgba(0, 0, 0, 0.05), 0px 1px 4px rgba(0, 0, 0, 0.08);
   background: white;
+  font-size: 14px;
+}
+.create-account {
+  cursor: pointer;
 }
 .input-container {
   display: flex;
@@ -19,11 +23,19 @@
   justify-content: start;
   align-items: start;
 }
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 ::ng-deep {
   .p-inputtext {
     width: 350px;
+    height: 37px;
   }
   .p-button {
     width: 150px;
+    font-size: 14px;
   }
 }

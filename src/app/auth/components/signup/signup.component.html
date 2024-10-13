@@ -1,1 +1,19 @@
-<p>signup works!</p>
+<div class="field-container">
+  <div class="input-container">
+    <label for="email">Email</label>
+    <input pInputText id="email" [(ngModel)]="email" />
+  </div>
+  <div class="input-container">
+    <label for="username">Username</label>
+    <input pInputText id="username" [(ngModel)]="username" />
+  </div>
+  <div class="input-container">
+    <label for="password">Password</label>
+    <p-password id="password" [(ngModel)]="password" [toggleMask]="true" />
+  </div>
+  <small (click)="goToLogin()" class="create-account">Dont have an account? Create one</small>
+  <div class="btn-container">
+    <p-button label="Create Account" (onClick)="submitSignup()" [disabled]="!username || !password" />
+  </div>
+</div>
+<p-toast />

@@ -7,6 +7,9 @@
     <label for="password">Password</label>
     <p-password id="password" [(ngModel)]="password" [toggleMask]="true" />
   </div>
-  <p-button label="Login" (onClick)="submitLogin()" [disabled]="!username || !password" />
+  <small (click)="goToSignup()" class="create-account">Dont have an account? Create one</small>
+  <div class="btn-container">
+    <p-button label="Login" (onClick)="submitLogin()" [disabled]="!username || !password" />
+  </div>
 </div>
 <p-toast />
