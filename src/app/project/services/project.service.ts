@@ -8,6 +8,8 @@ import { environment } from "../../../environments/environment.development";
 })
 export class ProjectService {
   private baseUrl = environment.BASE_URL;
+  private rapidApiHost = environment.rapidApiHost;
+  private rapidApiKey = environment.rapidApiKey;
 
   constructor(private http: HttpClient) {}
 
@@ -29,5 +31,16 @@ export class ProjectService {
   getProjects(): Observable<any> {
     const url = `${this.baseUrl}/projects/`;
     return this.http.get(url);
+  }
+
+  getSynonyms(word: string): Observable<any> {
+    const url = `${this.rapidApiHost}/words/${word}`;
+
+    const headers = new HttpHeaders({
+      "x-rapidapi-host": this.rapidApiHost,
+      "x-rapidapi-key": this.rapidApiKey,
+    });
+
+    return this.http.get(url, { headers });
   }
 }
