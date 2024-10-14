@@ -8,7 +8,13 @@
   </div>
   <div class="title-container">
     <label for="desciption">Description</label>
-    <p-editor id="desciption" [(ngModel)]="text" [style]="{ height: '320px' }" />
+    <p-editor
+      #editor
+      id="desciption"
+      [(ngModel)]="text"
+      [style]="{ height: '320px' }"
+      (onInit)="onEditorInit($event)"
+    />
   </div>
 
   <p-button label="Submit" (onClick)="createDocument()" />
