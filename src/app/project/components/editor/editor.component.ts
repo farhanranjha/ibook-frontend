@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ButtonModule } from "primeng/button";
 import { EditorModule } from "primeng/editor";
@@ -18,7 +18,7 @@ import Quill from "quill";
   styleUrls: ["./editor.component.scss"],
   providers: [MessageService],
 })
-export class EditorComponent {
+export class EditorComponent implements OnInit {
   @ViewChild("editor") editor: any;
 
   text: string = "";
@@ -32,6 +32,14 @@ export class EditorComponent {
     private projectService: ProjectService,
     private messageService: MessageService
   ) {}
+
+  ngOnInit(): void {
+    this.projectService.getSynonyms("tell").subscribe({
+      next(value) {
+        console.log("===value===> ", value);
+      },
+    });
+  }
 
   onEditorInit(event: any) {
     const quillEditor: Quill = event.editor;

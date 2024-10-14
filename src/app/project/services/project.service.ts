@@ -34,7 +34,7 @@ export class ProjectService {
   }
 
   getSynonyms(word: string): Observable<any> {
-    const url = `${this.rapidApiHost}/words/${word}`;
+    const url = `https://${this.rapidApiHost}/words/${word}`;
 
     const headers = new HttpHeaders({
       "x-rapidapi-host": this.rapidApiHost,
