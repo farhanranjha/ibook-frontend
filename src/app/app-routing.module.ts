@@ -14,9 +14,7 @@ import { LoggedGuard } from "./guards/logged.guard";
       {
         path: "",
         component: LayoutComponent,
-        children: [
-          { path: "project", loadChildren: () => import("./project/project.module").then((m) => m.ProjectModule) },
-        ],
+        children: [{ path: "", loadChildren: () => import("./project/project.module").then((m) => m.ProjectModule) }],
         canActivate: [AuthGuard],
       },
       {

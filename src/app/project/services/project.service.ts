@@ -26,7 +26,7 @@ export class ProjectService {
     return this.http.post(url, body, { headers });
   }
 
-  getProjects(token: string): Observable<any> {
+  getProjects(): Observable<any> {
     const url = `${this.baseUrl}/projects/`;
     return this.http.get(url);
   }

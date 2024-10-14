@@ -1,1 +1,19 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <div class="create-container">
+    <p-button label="Create" (onClick)="createDocument()" />
+  </div>
+  <p-table [value]="projects" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{ product.title }}</td>
+        <td>{{ product.description }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

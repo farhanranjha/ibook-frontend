@@ -4,8 +4,9 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { EditorComponent } from "./components/editor/editor.component";
 
 const routes: Routes = [
-  { path: "", component: DashboardComponent },
+  { path: "dashboard", component: DashboardComponent },
   { path: "editor", component: EditorComponent },
+  { path: "**", redirectTo: "/dashboard" },
 ];
 
 @NgModule({

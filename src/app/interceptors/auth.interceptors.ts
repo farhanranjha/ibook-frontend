@@ -14,11 +14,10 @@ export class AuthInterceptor implements HttpInterceptor {
       take(1),
       exhaustMap((user) => {
         const authToken = user?.accessToken;
-
         const authReq = authToken
           ? req.clone({
               setHeaders: {
-                Authorization: `${authToken}`,
+                Authorization: `Bearer ${authToken}`,
               },
             })
           : req;
