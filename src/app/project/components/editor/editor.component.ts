@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, ViewChild } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ButtonModule } from "primeng/button";
 import { EditorModule } from "primeng/editor";
@@ -7,12 +7,13 @@ import { ProjectService } from "../../services/project.service";
 import { MessageService } from "primeng/api";
 import { ToastModule } from "primeng/toast";
 import { Router } from "@angular/router";
+import { SidebarModule } from "primeng/sidebar";
 import Quill from "quill";
 
 @Component({
   selector: "app-editor",
   standalone: true,
-  imports: [EditorModule, FormsModule, ButtonModule, InputTextModule, ToastModule],
+  imports: [EditorModule, FormsModule, ButtonModule, InputTextModule, ToastModule, SidebarModule],
   templateUrl: "./editor.component.html",
   styleUrls: ["./editor.component.scss"],
   providers: [MessageService],
@@ -22,8 +23,15 @@ export class EditorComponent {
 
   text: string = "";
   title: string = "";
+  selectedWord: string = "";
+  sidebarVisible: boolean = false;
 
-  constructor(private router: Router, private projectService: ProjectService, private messageService: MessageService) {}
+  constructor(
+    private cd: ChangeDetectorRef,
+    private router: Router,
+    private projectService: ProjectService,
+    private messageService: MessageService
+  ) {}
 
   onEditorInit(event: any) {
     const quillEditor: Quill = event.editor;
@@ -33,7 +41,9 @@ export class EditorComponent {
       const selection = quillEditor.getSelection();
       if (selection && selection.length > 0) {
         const selectedText = quillEditor.getText(selection.index, selection.length);
-        console.log("Selected text on double click:", selectedText);
+        this.sidebarVisible = true;
+        this.selectedWord = selectedText;
+        this.cd.detectChanges();
       }
     });
   }

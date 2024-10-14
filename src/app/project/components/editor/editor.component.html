@@ -19,3 +19,9 @@
 
   <p-button label="Submit" (onClick)="createDocument()" />
 </div>
+<p-sidebar [(visible)]="sidebarVisible" position="right">
+  <h3>Dictionary</h3>
+  <p>
+    {{ selectedWord }}
+  </p>
+</p-sidebar>
