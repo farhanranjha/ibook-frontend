@@ -99,7 +99,7 @@ export class EditorComponent {
   }
 
   goToDashboard() {
-    this.router.navigateByUrl("/dashboard");
+    this.router.navigateByUrl("/");
   }
 
   onSubmit(): void {

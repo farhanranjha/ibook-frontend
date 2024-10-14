@@ -20,7 +20,7 @@ import { LoggedGuard } from "./guards/logged.guard";
       {
         path: "auth",
         loadChildren: () => import("./auth/auth.module").then((m) => m.AuthModule),
-        canActivate: [LoggedGuard],
+        // canActivate: [LoggedGuard],
       },
       { path: "notfound", component: NotfoundComponent },
       { path: "**", redirectTo: "/notfound" },
