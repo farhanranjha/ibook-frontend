@@ -21,7 +21,33 @@
 </div>
 <p-sidebar [(visible)]="sidebarVisible" position="right">
   <h3>Dictionary</h3>
-  <p>
-    {{ selectedWord }}
-  </p>
+  <p><strong>Selected Word:</strong> {{ wordMeaning?.word }}</p>
+
+  <div *ngFor="let result of wordMeaning?.results">
+    <div>
+      <p><strong>Definition:</strong> {{ result.definition }}</p>
+      <p><strong>Part of Speech:</strong> {{ result.partOfSpeech }}</p>
+
+      <p><strong>Synonyms:</strong> {{ result.synonyms?.join(", ") }}</p>
+
+      <p><strong>Attributes:</strong> {{ result.attribute?.join(", ") }}</p>
+
+      <p><strong>Type Of:</strong> {{ result.typeOf?.join(", ") }}</p>
+
+      <p><strong>Derivation:</strong> {{ result.derivation?.join(", ") }}</p>
+
+      <p><strong>Examples:</strong></p>
+      <ul>
+        <li *ngFor="let example of result.examples">{{ example }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <p><strong>Pronunciation:</strong> {{ wordMeaning?.pronunciation?.all }}</p>
+    <p>
+      <strong>Syllables:</strong> {{ wordMeaning?.syllables?.list?.join("-") }} ({{ wordMeaning?.syllables?.count }})
+    </p>
+    <p><strong>Frequency:</strong> {{ wordMeaning?.frequency }}</p>
+  </div>
 </p-sidebar>

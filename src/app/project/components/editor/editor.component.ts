@@ -9,21 +9,23 @@ import { ToastModule } from "primeng/toast";
 import { Router } from "@angular/router";
 import { SidebarModule } from "primeng/sidebar";
 import Quill from "quill";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-editor",
   standalone: true,
-  imports: [EditorModule, FormsModule, ButtonModule, InputTextModule, ToastModule, SidebarModule],
+  imports: [EditorModule, CommonModule, FormsModule, ButtonModule, InputTextModule, ToastModule, SidebarModule],
   templateUrl: "./editor.component.html",
   styleUrls: ["./editor.component.scss"],
   providers: [MessageService],
 })
-export class EditorComponent implements OnInit {
+export class EditorComponent {
   @ViewChild("editor") editor: any;
 
   text: string = "";
   title: string = "";
   selectedWord: string = "";
+  wordMeaning: any;
   sidebarVisible: boolean = false;
 
   constructor(
@@ -33,10 +35,14 @@ export class EditorComponent implements OnInit {
     private messageService: MessageService
   ) {}
 
-  ngOnInit(): void {
-    this.projectService.getSynonyms("tell").subscribe({
-      next(value) {
-        console.log("===value===> ", value);
+  findMeaning() {
+    console.log("===this.selectedWord===> ", this.selectedWord);
+
+    this.projectService.getSynonyms(this.selectedWord).subscribe({
+      next: (value) => {
+        this.wordMeaning = value;
+        this.sidebarVisible = true;
+        this.cd.detectChanges();
       },
     });
   }
@@ -49,8 +55,8 @@ export class EditorComponent implements OnInit {
       const selection = quillEditor.getSelection();
       if (selection && selection.length > 0) {
         const selectedText = quillEditor.getText(selection.index, selection.length);
-        this.sidebarVisible = true;
         this.selectedWord = selectedText;
+        this.findMeaning();
         this.cd.detectChanges();
       }
     });
