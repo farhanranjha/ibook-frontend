@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { ButtonModule } from "primeng/button";
 import { EditorModule } from "primeng/editor";
 import { InputTextModule } from "primeng/inputtext";
@@ -10,11 +10,22 @@ import { Router } from "@angular/router";
 import { SidebarModule } from "primeng/sidebar";
 import Quill from "quill";
 import { CommonModule } from "@angular/common";
+import { DialogModule } from "primeng/dialog";
 
 @Component({
   selector: "app-editor",
   standalone: true,
-  imports: [EditorModule, CommonModule, FormsModule, ButtonModule, InputTextModule, ToastModule, SidebarModule],
+  imports: [
+    EditorModule,
+    DialogModule,
+    CommonModule,
+    FormsModule,
+    ButtonModule,
+    InputTextModule,
+    ToastModule,
+    SidebarModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: "./editor.component.html",
   styleUrls: ["./editor.component.scss"],
   providers: [MessageService],
@@ -27,13 +38,26 @@ export class EditorComponent {
   selectedWord: string = "";
   wordMeaning: any;
   sidebarVisible: boolean = false;
+  modalVisible: boolean = false;
+  friendForm!: FormGroup;
 
   constructor(
     private cd: ChangeDetectorRef,
     private router: Router,
     private projectService: ProjectService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private fb: FormBuilder
   ) {}
+
+  ngOnInit(): void {
+    this.friendForm = this.fb.group({
+      name: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
+      address: ["", Validators.required],
+      city: ["", Validators.required],
+      postalCode: ["", Validators.required],
+    });
+  }
 
   findMeaning() {
     console.log("===this.selectedWord===> ", this.selectedWord);
@@ -65,6 +89,7 @@ export class EditorComponent {
   createDocument() {
     this.projectService.createProject(this.title, this.text).subscribe({
       next: () => {
+        this.modalVisible = true;
         this.messageService.add({ severity: "success", summary: "Success", detail: "Document saved!" });
       },
       error: (err) => {
@@ -75,5 +100,14 @@ export class EditorComponent {
 
   goToDashboard() {
     this.router.navigateByUrl("/dashboard");
+  }
+
+  onSubmit(): void {
+    if (this.friendForm.valid) {
+      this.modalVisible = false;
+      console.log("Form Submitted", this.friendForm.value);
+    } else {
+      console.log("Form is invalid");
+    }
   }
 }

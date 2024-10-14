@@ -51,3 +51,36 @@
     <p><strong>Frequency:</strong> {{ wordMeaning?.frequency }}</p>
   </div>
 </p-sidebar>
+<p-dialog header="Enter your friend's details" [modal]="true" [(visible)]="modalVisible" [style]="{ width: '25rem' }">
+  <form class="form-container" [formGroup]="friendForm" (ngSubmit)="onSubmit()">
+    <div class="input-container">
+      <label for="name" class="font-semibold w-6rem">Name</label>
+      <input pInputText id="name" class="flex-auto" formControlName="name" autocomplete="off" />
+    </div>
+
+    <div class="input-container">
+      <label for="email" class="font-semibold w-6rem">Email</label>
+      <input pInputText id="email" class="flex-auto" formControlName="email" autocomplete="off" />
+    </div>
+
+    <div class="input-container">
+      <label for="address" class="font-semibold w-6rem">Address</label>
+      <input pInputText id="address" class="flex-auto" formControlName="address" autocomplete="off" />
+    </div>
+
+    <div class="input-container">
+      <label for="city" class="font-semibold w-6rem">City</label>
+      <input pInputText id="city" class="flex-auto" formControlName="city" autocomplete="off" />
+    </div>
+
+    <div class="input-container">
+      <label for="postalCode" class="font-semibold w-6rem">Postal Code</label>
+      <input pInputText id="postalCode" class="flex-auto" formControlName="postalCode" autocomplete="off" />
+    </div>
+
+    <div class="button-container">
+      <p-button label="Cancel" severity="secondary" (onClick)="modalVisible = false" />
+      <p-button label="Submit" type="submit" />
+    </div>
+  </form>
+</p-dialog>
