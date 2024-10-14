@@ -6,6 +6,7 @@ import { LoginComponent } from "./auth/components/login/login.component";
 import { SignupComponent } from "./auth/components/signup/signup.component";
 import { NotfoundComponent } from "./shared/notfound/notfound.component";
 import { AuthGuard } from "./guards/auth.guard";
+import { LoggedGuard } from "./guards/logged.guard";
 
 @NgModule({
   imports: [
@@ -18,7 +19,11 @@ import { AuthGuard } from "./guards/auth.guard";
         ],
         canActivate: [AuthGuard],
       },
-      { path: "auth", loadChildren: () => import("./auth/auth.module").then((m) => m.AuthModule) },
+      {
+        path: "auth",
+        loadChildren: () => import("./auth/auth.module").then((m) => m.AuthModule),
+        canActivate: [LoggedGuard],
+      },
       { path: "notfound", component: NotfoundComponent },
       { path: "**", redirectTo: "/notfound" },
     ]),
