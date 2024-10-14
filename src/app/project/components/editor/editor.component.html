@@ -1,1 +1,15 @@
-<p>editor works!</p>
+<div class="back-button">
+  <p-button label="Dashboard" (onClick)="goToDashboard()" />
+</div>
+<div class="editor-container">
+  <div class="title-container">
+    <label for="title">Title</label>
+    <input pInputText id="title" aria-describedby="username-help" [(ngModel)]="title" />
+  </div>
+  <div class="title-container">
+    <label for="desciption">Description</label>
+    <p-editor id="desciption" [(ngModel)]="text" [style]="{ height: '320px' }" />
+  </div>
+
+  <p-button label="Submit" (onClick)="createDocument()" />
+</div>
